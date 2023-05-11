@@ -14,9 +14,23 @@ root.render(
         withGlobalStyles
         withNormalizeCSS
         theme={{
-          fontFamily: 'Verdana, sans-serif',
-          fontFamilyMonospace: 'Monaco, Courier, monospace',
-          headings: { fontFamily: 'Greycliff CF, sans-serif' },
+          fontFamily: 'Inter, sans-serif',
+          colors: {
+            main: [
+              '#F7FAFF',
+              '#F7FAFF',
+              '#DEECFF',
+              '#C9E0FF',
+              '#B7D6FF',
+              '#92C1FF',
+              '#5E96FC',
+              '#3B7CD3',
+              '#2F4A7D',
+              '#253B63',
+            ],
+          },
+          black: '#232134',
+          primaryColor: 'main',
         }}
       >
         <App />
