@@ -2,14 +2,14 @@ import { createStyles } from '@mantine/core';
 import { ReactComponent as FavoriteIcon } from '../../assets/svg/star.svg';
 import { MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { toggleFavorites } from '../../store/slices/commonSlice';
+import { toggleFavorites } from '../../store/slices/favouritesSlice';
 
 type Props = {
   id: number;
 };
 
 const StarIcon = ({ id }: Props) => {
-  const { favorites } = useAppSelector((state) => state.commonReducer);
+  const { favorites } = useAppSelector((state) => state.favoriteReducer);
   const dispatch = useAppDispatch();
 
   const useStyles = createStyles((theme) => ({

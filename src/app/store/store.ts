@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import commonReducer from './slices/commonSlice';
+import favoriteReducer from './slices/favouritesSlice';
 import { api } from './api/api';
 
 const reducers = combineReducers({
   commonReducer,
+  favoriteReducer,
   [api.reducerPath]: api.reducer,
 });
 

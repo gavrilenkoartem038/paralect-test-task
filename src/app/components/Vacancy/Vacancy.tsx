@@ -28,7 +28,7 @@ const Vacancy = ({
   };
 
   return (
-    <Paper shadow="none" withBorder p="xl" data-id={id}>
+    <Paper shadow="none" withBorder p="xl" data-id={id} maw="773px">
       <StarIcon id={id} />
       <Title order={4} size="1.5rem" color="main.6">
         {profession}
