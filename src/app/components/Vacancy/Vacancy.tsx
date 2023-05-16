@@ -1,6 +1,8 @@
 import { Paper, Title } from '@mantine/core';
 import { VacancyObject } from '../../store/api/types';
 import StarIcon from './StarIcon';
+import { useNavigate } from 'react-router-dom';
+import { MouseEvent } from 'react';
 
 const Vacancy = ({
   id,
@@ -13,6 +15,14 @@ const Vacancy = ({
   payment_to,
   currency,
 }: VacancyObject) => {
+  const navigate = useNavigate();
+
+  const onClick = (e: MouseEvent<HTMLElement | SVGElement>) => {
+    if (e.target instanceof HTMLElement && !window.location.pathname.includes('vacancies')) {
+      navigate(`/vacancies/${id}`);
+    }
+  };
+
   const getPaymentString = () => {
     let str = 'з/п ';
     if (payment) {
@@ -28,7 +38,7 @@ const Vacancy = ({
   };
 
   return (
-    <Paper shadow="none" withBorder p="xl" data-id={id} maw="773px">
+    <Paper onClick={onClick} shadow="none" withBorder p="xl" data-id={id} maw="773px">
       <StarIcon id={id} />
       <Title order={4} size="1.5rem" color="main.6">
         {profession}
