@@ -6,7 +6,7 @@ import { useAppSelector } from '../../store/hooks';
 
 const VacanciesList = (data: Vacancies) => {
   return (
-    <Flex direction="column" gap="lg">
+    <Flex direction="column" gap="md">
       {data?.objects.map((item) => (
         <Vacancy {...item} key={item.id} />
       ))}

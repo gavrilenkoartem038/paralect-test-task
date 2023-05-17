@@ -44,7 +44,7 @@ export interface VacancyObject {
   // date_archived: number;
   // date_published: number;
   // address: string;
-  payment: string;
+  payment: number;
   profession: string;
   // work: string;
   // metro: Metro[];
@@ -75,7 +75,7 @@ export interface VacancyObject {
 
 export interface Vacancies {
   objects: VacancyObject[];
-  total: 1000000;
+  total: number;
   corrected_keyword: string;
   more: boolean;
 }
@@ -85,4 +85,5 @@ export type SearchObject = {
   catalogues: string;
   paymentFrom: string;
   paymentTo: string;
+  page: number;
 };

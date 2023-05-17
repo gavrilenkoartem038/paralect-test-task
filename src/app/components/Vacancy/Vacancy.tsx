@@ -1,6 +1,7 @@
-import { Paper, Title } from '@mantine/core';
+import { Flex, Text, Title } from '@mantine/core';
 import { VacancyObject } from '../../store/api/types';
 import StarIcon from './StarIcon';
+import { ReactComponent as LocationIcon } from '../../assets/svg/location.svg';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent } from 'react';
 
@@ -10,7 +11,6 @@ const Vacancy = ({
   firm_name,
   town,
   type_of_work,
-  payment,
   payment_from,
   payment_to,
   currency,
@@ -24,27 +24,50 @@ const Vacancy = ({
   };
 
   const getPaymentString = () => {
-    let str = 'з/п ';
-    if (payment) {
-      str += payment;
-    }
+    const arr = ['з/п'];
     if (payment_from) {
-      str += `от ${payment_from}`;
+      arr.push(`от ${payment_from}`);
     }
     if (payment_to) {
-      str += `до ${payment_to}`;
+      arr.push(`от ${payment_to}`);
+    } else {
+      return 'з/п по договоренности';
     }
-    return `${str} ${currency}`;
+    return `${arr.join(' ')} ${currency}`;
   };
 
   return (
-    <Paper onClick={onClick} shadow="none" withBorder p="xl" data-id={id} maw="773px">
-      <StarIcon id={id} />
-      <Title order={4} size="1.5rem" color="main.6">
-        {profession}
-      </Title>
-      <div>{getPaymentString()}</div>
-    </Paper>
+    <Flex
+      direction="column"
+      onClick={onClick}
+      p="xl"
+      data-id={id}
+      gap="sm"
+      bg="white"
+      sx={{ border: '1px solid #EAEBED', borderRadius: '12px' }}
+    >
+      <Flex justify="space-between" gap="sm">
+        <Text
+          w="200px"
+          fw="600"
+          size="20px"
+          color="main.6"
+          sx={{ flexGrow: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+        >
+          {profession}
+        </Text>
+        <StarIcon id={id} />
+      </Flex>
+      <Flex gap="sm" align="center">
+        <Text fw="600">{getPaymentString()}</Text>
+        <Text w="10px" h="10px" bg="gray1.5" sx={{ borderRadius: '10px' }}></Text>
+        <Text>{type_of_work.title}</Text>
+      </Flex>
+      <Flex gap="sm" align="center">
+        <LocationIcon />
+        <Text>{town.title}</Text>
+      </Flex>
+    </Flex>
   );
 };
 

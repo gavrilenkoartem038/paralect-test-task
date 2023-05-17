@@ -17,6 +17,7 @@ root.render(
           withNormalizeCSS
           theme={{
             fontFamily: 'Inter, sans-serif',
+            lineHeight: '1.25',
             colors: {
               main: [
                 '#F7FAFF',
@@ -29,6 +30,18 @@ root.render(
                 '#3B7CD3',
                 '#2F4A7D',
                 '#253B63',
+              ],
+              gray1: [
+                '#f8f9fa',
+                '#F5F5F6',
+                '#EAEBED',
+                '#D5D6DC',
+                '#ced4da',
+                '#ACADB9',
+                '#7B7C88',
+                '#495057',
+                '#343a40',
+                '#212529',
               ],
             },
             black: '#232134',

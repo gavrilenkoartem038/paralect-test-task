@@ -15,6 +15,7 @@ const PageHeader = () => {
         pl="xl"
         pr="xl"
         sx={{ display: 'flex', alignItems: 'center', maxWidth: '1440px', width: '100%' }}
+        className="header"
       >
         <Flex justify="space-between" gap="140px" sx={{ width: '100%' }} className="header-container">
           <Flex align="center" gap="sm" className="title">
@@ -39,7 +40,16 @@ const PageHeader = () => {
                 <Burger opened={opened} onClick={() => setOpened((o) => !o)} size="md" color={theme.colors.gray[6]} />
               </Menu.Target>
               <Menu.Dropdown>
-                <Menu.Item>Settings</Menu.Item>
+                <Menu.Item>
+                  <NavLink to="/" className="nav-link">
+                    Поиск вакансий
+                  </NavLink>
+                </Menu.Item>
+                <Menu.Item>
+                  <NavLink to="/favorites" className="nav-link">
+                    Избранное
+                  </NavLink>
+                </Menu.Item>
               </Menu.Dropdown>
             </Menu>
           </MediaQuery>

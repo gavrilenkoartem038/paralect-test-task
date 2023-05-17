@@ -18,9 +18,10 @@ export const api = createApi({
       },
     }),
     getVacancies: builder.query<Vacancies, SearchObject>({
-      query({ searchString, catalogues, paymentFrom, paymentTo }) {
+      query({ searchString, catalogues, paymentFrom, paymentTo, page }) {
         return {
-          url: `/2.0/vacancies/?keyword=${searchString}&catalogues=${catalogues}&payment_from=${paymentFrom}&payment_to=${paymentTo}`,
+          url: `/2.0/vacancies/?keyword=${searchString}&catalogues=${catalogues}
+          &payment_from=${paymentFrom}&payment_to=${paymentTo}&page=${String(page)}&count=4`,
           headers: {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'X-Api-App-Id':

@@ -3,13 +3,17 @@ a, a:link, a:visited  {
   text-decoration: none;
 }
 
+.header {
+  border-bottom: none;
+}
+
 .nav-link {
   display: block;
   font-style: inherit;
 }
 
 .nav-link.active {
-  font-weight: bold;
+  color: #5E96FC;
 }
 
 .title {

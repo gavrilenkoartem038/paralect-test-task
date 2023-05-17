@@ -1,17 +1,29 @@
-import { TextInput, Text, Checkbox, Button, Group, Paper, Flex, Select, createStyles } from '@mantine/core';
+import { Text, Checkbox, Button, Group, Flex, Select, createStyles, Box, NumberInput } from '@mantine/core';
 import { IconChevronDown, IconX } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { useGetCatalogueQuery } from '../../store/api/api';
+import './form.css';
+import { useAppDispatch } from '../../store/hooks';
+import { changeFormParams } from '../../store/slices/commonSlice';
+
+export type FormValues = {
+  catalogues: string;
+  paymentFrom: string;
+  paymentTo: string;
+};
 
 const Form = () => {
+  const dispatch = useAppDispatch();
+
   const form = useForm({
     initialValues: {
-      email: '',
-      termsOfService: false,
+      catalogues: '',
+      paymentFrom: '',
+      paymentTo: '',
     },
 
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      paymentTo: (value, values) => (value < values.paymentFrom ? 'Введите правильный диапазон' : null),
     },
   });
 
@@ -23,13 +35,21 @@ const Form = () => {
         backgroundColor: theme.colors.main[5],
       },
     },
+    controls: {
+      border: 'none',
+    },
   }));
 
   const { classes } = useStyles();
 
+  const onSubmit = (values: FormValues) => {
+    console.log(values);
+    dispatch(changeFormParams(values));
+  };
+
   return (
-    <Paper miw={315} mx="auto" shadow="xs" p="lg">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <Flex miw={315} p="lg">
+      <form onSubmit={form.onSubmit((values) => dispatch(changeFormParams(values)))} className="form">
         <Flex justify={'space-between'}>
           <Text fw={700} fz="xl">
             Фильтры
@@ -38,26 +58,37 @@ const Form = () => {
             Сбросить все
           </Button>
         </Flex>
-        <TextInput withAsterisk label="Email" placeholder="your@email.com" {...form.getInputProps('email')} />
+        <NumberInput
+          label="Оклад"
+          placeholder="От"
+          step={1000}
+          {...form.getInputProps('paymentFrom')}
+          classNames={{ control: classes.controls }}
+        />
+        <NumberInput
+          placeholder="До"
+          step={1000}
+          {...form.getInputProps('paymentTo')}
+          classNames={{ control: classes.controls }}
+        />
         <Select
           label="Отрасль"
           placeholder="Выберите отрасль"
-          data={data ? data.map((el) => el.title_trimmed) : []}
+          data={
+            data
+              ? data.map((el) => {
+                  return { value: String(el.key), label: el.title_trimmed };
+                })
+              : []
+          }
           searchable
           rightSection={<IconChevronDown size="1rem" />}
           rightSectionWidth={40}
+          {...form.getInputProps('catalogues')}
         />
-        <Checkbox
-          mt="md"
-          label="I agree to sell my privacy"
-          {...form.getInputProps('termsOfService', { type: 'checkbox' })}
-        />
-
-        <Group position="right" mt="md">
-          <Button type="submit">Submit</Button>
-        </Group>
+        <Button type="submit">Применить</Button>
       </form>
-    </Paper>
+    </Flex>
   );
 };
 

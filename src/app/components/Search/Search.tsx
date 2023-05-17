@@ -1,4 +1,4 @@
-import { TextInput, Button } from '@mantine/core';
+import { TextInput, Button, createStyles } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeSearchString } from '../../store/slices/commonSlice';
@@ -17,8 +17,20 @@ const Search = () => {
     dispatch(changeSearchString(searchValue));
   };
 
+  const useStyles = createStyles((theme) => ({
+    input: {
+      borderColor: theme.colors.gray1[3],
+      '&:hover, &:active': {
+        borderColor: theme.colors.main[6],
+      },
+    },
+  }));
+
+  const { classes } = useStyles();
+
   return (
     <TextInput
+      classNames={{ input: classes.input }}
       onChange={onChange}
       icon={<IconSearch size="1.1rem" stroke={1.5} />}
       size="md"
