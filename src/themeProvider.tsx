@@ -27,6 +27,36 @@ const ThemeProvider = ({ children }: Props) => {
               },
             }),
           },
+          Select: {
+            styles: (theme) => ({
+              input: {
+                borderRadius: theme.radius.md,
+                borderColor: theme.colors.gray[3],
+                '&::placeholder': {
+                  color: theme.colors.gray[5],
+                },
+                '&:hover': {
+                  borderColor: theme.colors.main[6],
+                },
+              },
+              item: {
+                '&:hover': {
+                  backgroundColor: theme.colors.main[2],
+                },
+              },
+              wrapper: {
+                '&:focus-within .mantine-Select-rightSection': {
+                  transform: 'rotate(180deg)',
+                  svg: {
+                    stroke: theme.colors.main[6],
+                  },
+                },
+              },
+              // rightSection: {
+              //   transform: 'rotate(90deg)',
+              // },
+            }),
+          },
         },
         colors: {
           main: [
@@ -40,6 +70,18 @@ const ThemeProvider = ({ children }: Props) => {
             '#3B7CD3',
             '#2F4A7D',
             '#253B63',
+          ],
+          gray: [
+            '#f8f9fa',
+            '#F5F5F6',
+            '#EAEBED',
+            '#D5D6DC',
+            '#ced4da',
+            '#ACADB9',
+            '#7B7C88',
+            '#495057',
+            '#343a40',
+            '#212529',
           ],
           gray1: [
             '#f8f9fa',

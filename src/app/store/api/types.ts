@@ -44,11 +44,11 @@ export interface VacancyObject {
   // date_archived: number;
   // date_published: number;
   // address: string;
-  payment: number;
   profession: string;
   // work: string;
   // metro: Metro[];
   currency: string;
+  vacancyRichText: string;
   // moveable: boolean;
   // agreement: boolean;
   // anonymous: boolean;
