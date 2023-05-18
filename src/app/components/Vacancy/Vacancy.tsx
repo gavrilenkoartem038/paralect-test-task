@@ -5,16 +5,7 @@ import { ReactComponent as LocationIcon } from '../../assets/svg/location.svg';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent } from 'react';
 
-const Vacancy = ({
-  id,
-  profession,
-  firm_name,
-  town,
-  type_of_work,
-  payment_from,
-  payment_to,
-  currency,
-}: VacancyObject) => {
+const Vacancy = ({ id, profession, town, type_of_work, payment_from, payment_to, currency }: VacancyObject) => {
   const navigate = useNavigate();
 
   const onClick = (e: MouseEvent<HTMLElement | SVGElement>) => {

@@ -9,7 +9,7 @@ const PageHeader = () => {
   const theme = useMantineTheme();
 
   return (
-    <Flex justify="center" sx={{}}>
+    <Flex justify="center" sx={{ backgroundColor: 'white' }}>
       <Header
         height={{ base: 64, md: 84 }}
         pl="xl"

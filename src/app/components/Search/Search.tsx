@@ -37,6 +37,7 @@ const Search = () => {
       rightSection={<Button onClick={onClick}>Поиск</Button>}
       placeholder="Search questions"
       rightSectionWidth={120}
+      value={searchValue}
     />
   );
 };

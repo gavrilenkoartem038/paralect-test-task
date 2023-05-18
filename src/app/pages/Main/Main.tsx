@@ -16,7 +16,7 @@ const Main = () => {
   const skipValue = getToken() ? true : false;
   useLoginQuery(loginData, { skip: skipValue });
 
-  const pages = vacanciesData?.total ? Math.ceil(vacanciesData?.total / 4) : 125;
+  const pages = vacanciesData?.total as number;
 
   return (
     <>

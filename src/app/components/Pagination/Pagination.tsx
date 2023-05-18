@@ -17,12 +17,15 @@ function PagComponent({ total, reducer }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    if (activePage > pages) {
+      setPage(pages);
+    }
     if (reducer === 'common') {
       dispatch(changePage(activePage - 1));
     } else {
       dispatch(changeFavPage(activePage - 1));
     }
-  }, [activePage]);
+  }, [activePage, pages]);
 
   return <Pagination value={activePage} onChange={setPage} total={pages} sx={{ alignSelf: 'center' }} pt="24px" />;
 }

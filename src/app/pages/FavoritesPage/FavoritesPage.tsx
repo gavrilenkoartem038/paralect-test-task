@@ -3,6 +3,8 @@ import VacanciesList from '../../components/VacanciesList/VacanciesList';
 import { useGetFavoritesQuery } from '../../store/api/api';
 import { useAppSelector } from '../../store/hooks';
 import PagComponent from '../../components/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const FavoritesPage = () => {
   const { favorites, page } = useAppSelector((state) => state.favoriteReducer);
@@ -11,6 +13,14 @@ const FavoritesPage = () => {
   const pages = favorites.length <= 500 ? Math.ceil(favorites.length / 4) : 125;
 
   const { data, isFetching } = useGetFavoritesQuery(subArr);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (favorites.length === 0) {
+      navigate('/empty');
+    }
+  }, [navigate, favorites]);
 
   return (
     <>

@@ -52,9 +52,6 @@ const ThemeProvider = ({ children }: Props) => {
                   },
                 },
               },
-              // rightSection: {
-              //   transform: 'rotate(90deg)',
-              // },
             }),
           },
         },
