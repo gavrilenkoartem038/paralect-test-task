@@ -10,7 +10,6 @@ const Main = () => {
   const params = useAppSelector((state) => state.commonReducer);
 
   const { data, isFetching, isLoading } = useGetVacanciesQuery(params);
-  console.log(data?.total);
   const pages = data?.total ? Math.ceil(data?.total / 4) : 125;
 
   return (
@@ -25,7 +24,7 @@ const Main = () => {
           <Flex direction="column" gap="md" w="100%" maw="773px">
             <Search />
             {isFetching ? <Loader size="xl" variant="dots" /> : data && <VacanciesList {...data} />}
-            <PagComponent total={pages} />
+            <PagComponent total={pages} reducer="common" />
           </Flex>
         </Flex>
       )}

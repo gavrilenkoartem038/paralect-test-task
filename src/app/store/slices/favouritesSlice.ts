@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type Favorites = {
   favorites: number[];
+  page: number;
 };
 
 const getStorage = () => {
@@ -15,6 +16,7 @@ const getStorage = () => {
 
 const initialState: Favorites = {
   favorites: getStorage(),
+  page: 0,
 };
 
 export const favoritesSlice = createSlice({
@@ -30,9 +32,15 @@ export const favoritesSlice = createSlice({
       }
       localStorage.setItem('favorites', JSON.stringify(state.favorites));
     },
+    changeFavPage: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        page: action.payload,
+      };
+    },
   },
 });
 
-export const { toggleFavorites } = favoritesSlice.actions;
+export const { toggleFavorites, changeFavPage } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

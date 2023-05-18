@@ -3,6 +3,16 @@ import { Catalogue, SearchObject, Vacancies, VacancyObject } from './types';
 
 const API_URL = 'https://startup-summer-2023-proxy.onrender.com';
 
+const searchUrl = ({ searchString, catalogues, paymentFrom, paymentTo, page }: SearchObject) => {
+  let str = `/2.0/vacancies/?page=${String(page)}&count=4`;
+  if (searchString !== '') str += `&keyword=${searchString}`;
+  if (catalogues !== '') str += `&catalogues=${catalogues}`;
+  if (paymentFrom !== '') str += `&payment_from=${paymentFrom}`;
+  if (paymentTo !== '') str += `&payment_to=${paymentTo}`;
+
+  return str;
+};
+
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
@@ -18,10 +28,9 @@ export const api = createApi({
       },
     }),
     getVacancies: builder.query<Vacancies, SearchObject>({
-      query({ searchString, catalogues, paymentFrom, paymentTo, page }) {
+      query(searchObj) {
         return {
-          url: `/2.0/vacancies/?keyword=${searchString}&catalogues=${catalogues}
-          &payment_from=${paymentFrom}&payment_to=${paymentTo}&page=${String(page)}&count=4`,
+          url: searchUrl(searchObj),
           headers: {
             'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
             'X-Api-App-Id':

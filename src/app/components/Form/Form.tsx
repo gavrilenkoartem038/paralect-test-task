@@ -1,4 +1,4 @@
-import { Text, Checkbox, Button, Group, Flex, Select, createStyles, Box, NumberInput } from '@mantine/core';
+import { Text, Button, Flex, Select, createStyles, NumberInput } from '@mantine/core';
 import { IconChevronDown, IconX } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { useGetCatalogueQuery } from '../../store/api/api';
@@ -29,23 +29,13 @@ const Form = () => {
 
   const { data } = useGetCatalogueQuery();
 
-  const useStyles = createStyles((theme) => ({
-    button: {
-      '&:hover': {
-        backgroundColor: theme.colors.main[5],
-      },
-    },
+  const useStyles = createStyles(() => ({
     controls: {
       border: 'none',
     },
   }));
 
   const { classes } = useStyles();
-
-  const onSubmit = (values: FormValues) => {
-    console.log(values);
-    dispatch(changeFormParams(values));
-  };
 
   return (
     <Flex miw={315} p="lg">
@@ -54,9 +44,7 @@ const Form = () => {
           <Text fw={700} fz="xl">
             Фильтры
           </Text>
-          <Button rightIcon={<IconX />} className={classes.button}>
-            Сбросить все
-          </Button>
+          <Button rightIcon={<IconX />}>Сбросить все</Button>
         </Flex>
         <NumberInput
           label="Оклад"
@@ -81,7 +69,6 @@ const Form = () => {
                 })
               : []
           }
-          searchable
           rightSection={<IconChevronDown size="1rem" />}
           rightSectionWidth={40}
           {...form.getInputProps('catalogues')}
