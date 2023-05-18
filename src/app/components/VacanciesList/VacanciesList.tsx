@@ -1,8 +1,6 @@
-import { Text, Paper, Title, Group, Flex } from '@mantine/core';
-import { SearchObject, Vacancies, VacancyObject } from '../../store/api/types';
-import { useGetVacanciesQuery } from '../../store/api/api';
+import { Flex } from '@mantine/core';
+import { Vacancies } from '../../store/api/types';
 import Vacancy from '../Vacancy/Vacancy';
-import { useAppSelector } from '../../store/hooks';
 
 const VacanciesList = (data: Vacancies) => {
   return (

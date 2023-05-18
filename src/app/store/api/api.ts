@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Catalogue, SearchObject, Vacancies, VacancyObject } from './types';
+import { Catalogue, LoginData, LoginReturn, SearchObject, Vacancies, VacancyObject } from './types';
+import getHeaders from '../../utils/tokenUtils';
 
 const API_URL = 'https://startup-summer-2023-proxy.onrender.com';
 
 const searchUrl = ({ searchString, catalogues, paymentFrom, paymentTo, page }: SearchObject) => {
-  let str = `/2.0/vacancies/?page=${String(page)}&count=4`;
+  let str = `/2.0/vacancies/?page=${String(page)}&count=4&published=1`;
   if (searchString !== '') str += `&keyword=${searchString}`;
   if (catalogues !== '') str += `&catalogues=${catalogues}`;
   if (paymentFrom !== '') str += `&payment_from=${paymentFrom}`;
@@ -17,13 +18,29 @@ export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
+    prepareHeaders: (headers: Headers, { endpoint }) => {
+      getHeaders(headers, endpoint);
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
+    login: builder.query<LoginReturn, LoginData>({
+      query(loginData) {
+        return {
+          url: '/2.0/oauth2/password/',
+          params: loginData,
+        };
+      },
+      async onQueryStarted(arg, { queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        window.localStorage.setItem('app_access_token', data.access_token);
+        window.localStorage.setItem('exp', data.ttl.toString());
+      },
+    }),
     getCatalogue: builder.query<Catalogue[], void>({
       query() {
         return {
           url: '/2.0/catalogues/',
-          headers: { 'x-secret-key': 'GEU4nvd3rej*jeh.eqp' },
         };
       },
     }),
@@ -31,11 +48,6 @@ export const api = createApi({
       query(searchObj) {
         return {
           url: searchUrl(searchObj),
-          headers: {
-            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-            'X-Api-App-Id':
-              'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-          },
         };
       },
     }),
@@ -44,11 +56,6 @@ export const api = createApi({
         const list = vacanciesList.join('&ids[]=');
         return {
           url: `/2.0/vacancies/?ids[]=${list}`,
-          headers: {
-            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-            'X-Api-App-Id':
-              'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-          },
         };
       },
     }),
@@ -56,15 +63,11 @@ export const api = createApi({
       query(id) {
         return {
           url: `/2.0/vacancies/${id}`,
-          headers: {
-            'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-            'X-Api-App-Id':
-              'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-          },
         };
       },
     }),
   }),
 });
 
-export const { useGetCatalogueQuery, useGetVacanciesQuery, useGetFavoritesQuery, useGetVacancyQuery } = api;
+export const { useGetCatalogueQuery, useGetVacanciesQuery, useGetFavoritesQuery, useGetVacancyQuery, useLoginQuery } =
+  api;

@@ -10,20 +10,20 @@ const FavoritesPage = () => {
   const subArr = favorites.slice(page * 4, page * 4 + 4);
   const pages = favorites.length <= 500 ? Math.ceil(favorites.length / 4) : 125;
 
-  const { data, isLoading } = useGetFavoritesQuery(subArr);
+  const { data, isFetching } = useGetFavoritesQuery(subArr);
 
   return (
     <>
-      {isLoading ? (
-        <Center h="80vh" mx="auto">
-          <Loader size="xl" variant="dots" />
-        </Center>
-      ) : (
-        <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" p="40px">
-          {data && <VacanciesList {...data} />}
-          <PagComponent total={pages} reducer="favorites" />
-        </Flex>
-      )}
+      <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" p="40px">
+        {isFetching ? (
+          <Center mih="608px" mx="auto">
+            <Loader size="xl" variant="dots" />
+          </Center>
+        ) : (
+          data && <VacanciesList {...data} />
+        )}
+        <PagComponent total={pages} reducer="favorites" />
+      </Flex>
     </>
   );
 };

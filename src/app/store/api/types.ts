@@ -87,3 +87,19 @@ export type SearchObject = {
   paymentTo: string;
   page: number;
 };
+
+export type LoginData = {
+  login: string;
+  password: string;
+  client_id: number;
+  client_secret: string;
+  hr: number;
+};
+
+export type LoginReturn = {
+  access_token: string;
+  refresh_token: string;
+  ttl: number;
+  expires_in: number;
+  token_type: string;
+};
