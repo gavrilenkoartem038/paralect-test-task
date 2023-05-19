@@ -14,8 +14,8 @@ const VacancyPage = () => {
           <Loader size="xl" variant="dots" />
         </Center>
       ) : (
-        <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" pt="40px" pb="40px">
-          {data && <Vacancy {...data} />}
+        <Flex direction="column" gap="20px" w="100%" maw="773px" justify="center" m="0 auto" pt="40px" pb="40px">
+          {data && <Vacancy vacancy={data} type="current" />}
           <Box p="xl" data-id={id} bg="white" sx={{ border: '1px solid #EAEBED', borderRadius: '12px' }}>
             <TypographyStylesProvider>
               <div dangerouslySetInnerHTML={{ __html: data?.vacancyRichText as string }}></div>

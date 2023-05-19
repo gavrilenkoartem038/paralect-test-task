@@ -14,7 +14,7 @@ const initialState: SearchType = {
   catalogues: '',
   paymentFrom: '',
   paymentTo: '',
-  page: 0,
+  page: 1,
 };
 
 export const commonSlice = createSlice({
@@ -34,7 +34,6 @@ export const commonSlice = createSlice({
       };
     },
     changeFormParams: (state, action: PayloadAction<FormValues>) => {
-      console.log(action.payload.catalogues);
       return {
         ...state,
         catalogues: action.payload.catalogues,

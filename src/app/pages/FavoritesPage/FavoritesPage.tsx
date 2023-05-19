@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 const FavoritesPage = () => {
   const { favorites, page } = useAppSelector((state) => state.favoriteReducer);
 
-  const subArr = favorites.slice(page * 4, page * 4 + 4);
+  const subArr = favorites.slice((page - 1) * 4, page * 4);
   const pages = favorites.length <= 500 ? Math.ceil(favorites.length / 4) : 125;
 
   const { data, isFetching } = useGetFavoritesQuery(subArr);

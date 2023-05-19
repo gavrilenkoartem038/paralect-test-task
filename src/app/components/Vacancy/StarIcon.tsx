@@ -16,13 +16,13 @@ const StarIcon = ({ id }: Props) => {
     button: {
       cursor: 'pointer',
       '&:hover path': {
-        stroke: theme.colors.main[6],
+        stroke: theme.colors.main[5],
       },
       '&.active': {
-        fill: theme.colors.main[6],
+        fill: theme.colors.main[5],
 
         '& path': {
-          stroke: theme.colors.main[6],
+          stroke: theme.colors.main[5],
         },
       },
     },

@@ -5,7 +5,7 @@ import getHeaders from '../../utils/tokenUtils';
 const API_URL = 'https://startup-summer-2023-proxy.onrender.com';
 
 const searchUrl = ({ searchString, catalogues, paymentFrom, paymentTo, page }: SearchObject) => {
-  let str = `/2.0/vacancies/?page=${String(page)}&count=4&published=1`;
+  let str = `/2.0/vacancies/?page=${String(page - 1)}&count=4&published=1`;
   if (searchString !== '') str += `&keyword=${searchString}`;
   if (catalogues !== '') str += `&catalogues=${catalogues}`;
   if (paymentFrom !== '') str += `&payment_from=${paymentFrom}`;

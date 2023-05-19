@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { MantineProvider } from '@mantine/core';
 import { ReactElement } from 'react';
 
@@ -15,41 +16,105 @@ const ThemeProvider = ({ children }: Props) => {
         lineHeight: '1.25',
         components: {
           Button: {
-            styles: (theme) => ({
-              root: {
-                borderRadius: theme.radius.md,
-                '&:hover': {
+            variants: {
+              light: (theme) => ({
+                root: {
+                  backgroundColor: theme.colors.main[1],
+                  color: theme.colors.main[6],
+                },
+              }),
+              subtle: (theme) => ({
+                root: {
+                  backgroundColor: 'unset',
+                  color: theme.colors.gray[5],
+                  ...theme.fn.hover({ color: theme.colors.main[4], backgroundColor: 'unset' }),
+                  '&:active': {
+                    color: theme.colors.main[5],
+                  },
+                },
+              }),
+              filled: (theme) => ({
+                root: {
+                  borderRadius: theme.radius.md,
                   backgroundColor: theme.colors.main[5],
+                  '&:hover': {
+                    backgroundColor: theme.colors.main[4],
+                  },
+                  '&:active': {
+                    backgroundColor: theme.colors.main[6],
+                  },
                 },
-                '&:active': {
-                  backgroundColor: theme.colors.main[7],
-                },
-              },
-            }),
+              }),
+            },
           },
           Select: {
             styles: (theme) => ({
+              label: {
+                marginBottom: '8px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              },
               input: {
                 borderRadius: theme.radius.md,
                 borderColor: theme.colors.gray[3],
+                padding: '20px 12px',
                 '&::placeholder': {
                   color: theme.colors.gray[5],
                 },
                 '&:hover': {
-                  borderColor: theme.colors.main[6],
+                  borderColor: theme.colors.main[5],
                 },
               },
               item: {
                 '&:hover': {
-                  backgroundColor: theme.colors.main[2],
+                  backgroundColor: theme.colors.main[3],
                 },
               },
               wrapper: {
                 '&:focus-within .mantine-Select-rightSection': {
                   transform: 'rotate(180deg)',
                   svg: {
-                    stroke: theme.colors.main[6],
+                    stroke: theme.colors.main,
                   },
+                },
+              },
+            }),
+          },
+          NumberInput: {
+            styles: (theme) => ({
+              label: {
+                marginBottom: '8px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              },
+              input: {
+                borderRadius: theme.radius.md,
+                borderColor: theme.colors.gray[3],
+                padding: '20px 12px',
+                '&::placeholder': {
+                  color: theme.colors.gray[5],
+                },
+                '&:hover': {
+                  borderColor: theme.colors.main[5],
+                },
+              },
+            }),
+          },
+          Input: {
+            styles: (theme) => ({
+              label: {
+                marginBottom: '8px',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+              },
+              input: {
+                borderRadius: theme.radius.md,
+                borderColor: theme.colors.gray[2],
+                '&::placeholder': {
+                  color: theme.colors.gray[5],
+                },
+                '&:hover': {
+                  borderColor: theme.colors.main[5],
                 },
               },
             }),
@@ -58,7 +123,6 @@ const ThemeProvider = ({ children }: Props) => {
         colors: {
           main: [
             '#F7FAFF',
-            '#F7FAFF',
             '#DEECFF',
             '#C9E0FF',
             '#B7D6FF',
@@ -66,6 +130,7 @@ const ThemeProvider = ({ children }: Props) => {
             '#5E96FC',
             '#3B7CD3',
             '#2F4A7D',
+            '#253B63',
             '#253B63',
           ],
           gray: [

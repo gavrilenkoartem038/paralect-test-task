@@ -6,6 +6,7 @@ import './form.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeFormParams } from '../../store/slices/commonSlice';
 import { FormEvent, useState } from 'react';
+import { ReactComponent as DownIcon } from '../../assets/svg/down.svg';
 
 export type FormValues = {
   catalogues: string;
@@ -54,31 +55,16 @@ const Form = () => {
   const { classes } = useStyles();
 
   return (
-    <Flex miw={315} p="lg">
+    <Flex miw={315} p="18px 20px" sx={{ border: '1px solid #EAEBED', borderRadius: '12px', backgroundColor: 'white' }}>
       <form onSubmit={onSubmit} className="form">
-        <Flex justify={'space-between'}>
-          <Text fw={700} fz="xl">
+        <Flex justify={'space-between'} align="flex-start">
+          <Text fw={700} fz="xl" lh="1" mb="2rem">
             Фильтры
           </Text>
-          <Button rightIcon={<IconX />}>Сбросить все</Button>
+          <Button variant="subtle" compact p="0" ml="4px" h="20px" fw="500" rightIcon={<IconX size="14px" />}>
+            Сбросить все
+          </Button>
         </Flex>
-        <NumberInput
-          label="Оклад"
-          placeholder="От"
-          step={1000}
-          {...form.getInputProps('paymentFrom')}
-          classNames={{ control: classes.controls }}
-          value={valueFrom}
-          onChange={setValueFrom}
-        />
-        <NumberInput
-          placeholder="До"
-          step={1000}
-          {...form.getInputProps('paymentTo')}
-          classNames={{ control: classes.controls }}
-          value={valueTo}
-          onChange={setValueTo}
-        />
         <Select
           label="Отрасль"
           placeholder="Выберите отрасль"
@@ -89,13 +75,35 @@ const Form = () => {
                 })
               : []
           }
-          rightSection={<IconChevronDown size="1rem" />}
-          rightSectionWidth={40}
+          rightSection={<DownIcon />}
+          rightSectionWidth={46}
           {...form.getInputProps('catalogues')}
           value={cataloguesValue}
           onChange={setCatalogues}
+          mb="20px"
         />
-        <Button type="submit">Применить</Button>
+        <NumberInput
+          label="Оклад"
+          placeholder="От"
+          step={1000}
+          {...form.getInputProps('paymentFrom')}
+          classNames={{ control: classes.controls }}
+          value={valueFrom}
+          onChange={setValueFrom}
+          mb="0.5rem"
+        />
+        <NumberInput
+          placeholder="До"
+          step={1000}
+          {...form.getInputProps('paymentTo')}
+          classNames={{ control: classes.controls }}
+          value={valueTo}
+          onChange={setValueTo}
+          mb="1.25rem"
+        />
+        <Button type="submit" h="40px">
+          Применить
+        </Button>
       </form>
     </Flex>
   );

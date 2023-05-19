@@ -6,7 +6,7 @@ const VacanciesList = (data: Vacancies) => {
   return (
     <Flex direction="column" gap="md">
       {data?.objects.map((item) => (
-        <Vacancy {...item} key={item.id} />
+        <Vacancy vacancy={item} key={item.id} />
       ))}
     </Flex>
   );

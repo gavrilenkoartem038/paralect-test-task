@@ -12,7 +12,7 @@ type Props = {
 function PagComponent({ total, reducer }: Props) {
   const red = reducer === 'common' ? 'commonReducer' : 'favoriteReducer';
   const page = useAppSelector((state) => state[red].page);
-  const [activePage, setPage] = useState(page + 1);
+  const [activePage, setPage] = useState(page);
   const pages = total < 125 ? total : 125;
   const dispatch = useAppDispatch();
 
@@ -20,10 +20,11 @@ function PagComponent({ total, reducer }: Props) {
     if (activePage > pages) {
       setPage(pages);
     }
+    if (activePage === 0 && pages > 0) setPage(1);
     if (reducer === 'common') {
-      dispatch(changePage(activePage - 1));
+      dispatch(changePage(activePage));
     } else {
-      dispatch(changeFavPage(activePage - 1));
+      dispatch(changeFavPage(activePage));
     }
   }, [activePage, pages]);
 

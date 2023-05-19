@@ -4,6 +4,10 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeSearchString } from '../../store/slices/commonSlice';
 import { ChangeEvent, useState } from 'react';
 
+const useStyles = createStyles(() => ({
+  input: { height: '3rem' },
+}));
+
 const Search = () => {
   const searchString = useAppSelector((state) => state.commonReducer.searchString);
   const [searchValue, setSearchValue] = useState(searchString);
@@ -17,15 +21,6 @@ const Search = () => {
     dispatch(changeSearchString(searchValue));
   };
 
-  const useStyles = createStyles((theme) => ({
-    input: {
-      borderColor: theme.colors.gray1[3],
-      '&:hover, &:active': {
-        borderColor: theme.colors.main[6],
-      },
-    },
-  }));
-
   const { classes } = useStyles();
 
   return (
@@ -33,10 +28,13 @@ const Search = () => {
       classNames={{ input: classes.input }}
       onChange={onChange}
       icon={<IconSearch size="1.1rem" stroke={1.5} />}
-      size="md"
-      rightSection={<Button onClick={onClick}>Поиск</Button>}
+      rightSection={
+        <Button onClick={onClick} h="2rem">
+          Поиск
+        </Button>
+      }
       placeholder="Search questions"
-      rightSectionWidth={120}
+      rightSectionWidth={110}
       value={searchValue}
     />
   );
