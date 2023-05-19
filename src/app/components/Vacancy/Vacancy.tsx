@@ -60,7 +60,7 @@ const Vacancy = ({ vacancy, type }: Props) => {
         <Text fw={type === 'current' ? '700' : '600'} size={type === 'current' ? '20px' : 'inherit'}>
           {getPaymentString()}
         </Text>
-        <Text w="10px" h="10px" bg="gray1.5" sx={{ borderRadius: '10px' }}></Text>
+        <Text w="5px" h="5px" bg="gray.6" sx={{ borderRadius: '10px' }}></Text>
         <Text size={type === 'current' ? '20px' : 'inherit'}>{type_of_work.title}</Text>
       </Flex>
       <Flex gap="xs" align="center">

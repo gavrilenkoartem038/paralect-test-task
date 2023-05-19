@@ -35,18 +35,18 @@ const PageHeader = () => {
             </Flex>
           </MediaQuery>
           <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-            <Menu>
+            <Menu closeOnClickOutside={false}>
               <Menu.Target>
                 <Burger opened={opened} onClick={() => setOpened((o) => !o)} size="md" color={theme.colors.gray[6]} />
               </Menu.Target>
               <Menu.Dropdown>
                 <Menu.Item>
-                  <NavLink to="/" className="nav-link">
+                  <NavLink to="/" className="nav-link" onClick={() => setOpened(false)}>
                     Поиск вакансий
                   </NavLink>
                 </Menu.Item>
                 <Menu.Item>
-                  <NavLink to="/favorites" className="nav-link">
+                  <NavLink to="/favorites" className="nav-link" onClick={() => setOpened(false)}>
                     Избранное
                   </NavLink>
                 </Menu.Item>

@@ -1,11 +1,9 @@
 import { Text, Button, Flex, Select, createStyles, NumberInput } from '@mantine/core';
-import { IconChevronDown, IconX } from '@tabler/icons-react';
+import { IconX } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
 import { useGetCatalogueQuery } from '../../store/api/api';
-import './form.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeFormParams } from '../../store/slices/commonSlice';
-import { FormEvent, useState } from 'react';
 import { ReactComponent as DownIcon } from '../../assets/svg/down.svg';
 
 export type FormValues = {
@@ -16,12 +14,14 @@ export type FormValues = {
 
 const Form = () => {
   const dispatch = useAppDispatch();
+  const { paymentFrom, paymentTo, catalogues } = useAppSelector((state) => state.commonReducer);
+  const { data } = useGetCatalogueQuery();
 
   const form = useForm({
     initialValues: {
-      catalogues: '',
-      paymentFrom: '',
-      paymentTo: '',
+      catalogues,
+      paymentFrom,
+      paymentTo,
     },
 
     validate: {
@@ -29,39 +29,45 @@ const Form = () => {
     },
   });
 
-  const { data } = useGetCatalogueQuery();
-
   const useStyles = createStyles(() => ({
     controls: {
       border: 'none',
     },
   }));
 
-  const { paymentFrom, paymentTo, catalogues } = useAppSelector((state) => state.commonReducer);
-  const [valueFrom, setValueFrom] = useState<number | ''>(Number(paymentFrom) || '');
-  const [valueTo, setValueTo] = useState<number | ''>(Number(paymentTo) || '');
-  const [cataloguesValue, setCatalogues] = useState<string | null>(catalogues);
+  const onSubmit = (values: FormValues) => {
+    dispatch(changeFormParams(values));
+  };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formValues: FormValues = {
-      paymentFrom: String(valueFrom),
-      paymentTo: String(valueTo),
-      catalogues: String(cataloguesValue),
-    };
-    dispatch(changeFormParams(formValues));
+  const onReset = () => {
+    form.setValues({ catalogues: '', paymentFrom: '', paymentTo: '' });
+    dispatch(changeFormParams({ catalogues: '', paymentFrom: '', paymentTo: '' }));
   };
 
   const { classes } = useStyles();
 
   return (
-    <Flex miw={315} p="18px 20px" sx={{ border: '1px solid #EAEBED', borderRadius: '12px', backgroundColor: 'white' }}>
-      <form onSubmit={onSubmit} className="form">
+    <Flex
+      miw={315}
+      p="18px 20px"
+      sx={{ border: '1px solid #EAEBED', borderRadius: '12px', backgroundColor: 'white' }}
+      className="form-container"
+    >
+      <form onSubmit={form.onSubmit((values) => onSubmit(values))} onReset={onReset} className="form">
         <Flex justify={'space-between'} align="flex-start">
           <Text fw={700} fz="xl" lh="1" mb="2rem">
             Фильтры
           </Text>
-          <Button variant="subtle" compact p="0" ml="4px" h="20px" fw="500" rightIcon={<IconX size="14px" />}>
+          <Button
+            variant="subtle"
+            type="reset"
+            compact
+            p="0"
+            ml="4px"
+            h="20px"
+            fw="500"
+            rightIcon={<IconX size="14px" />}
+          >
             Сбросить все
           </Button>
         </Flex>
@@ -78,8 +84,8 @@ const Form = () => {
           rightSection={<DownIcon />}
           rightSectionWidth={46}
           {...form.getInputProps('catalogues')}
-          value={cataloguesValue}
-          onChange={setCatalogues}
+          // value={cataloguesValue}
+          // onChange={setCatalogues}
           mb="20px"
         />
         <NumberInput
@@ -88,8 +94,8 @@ const Form = () => {
           step={1000}
           {...form.getInputProps('paymentFrom')}
           classNames={{ control: classes.controls }}
-          value={valueFrom}
-          onChange={setValueFrom}
+          // value={valueFrom}
+          // onChange={setValueFrom}
           mb="0.5rem"
         />
         <NumberInput
@@ -97,8 +103,8 @@ const Form = () => {
           step={1000}
           {...form.getInputProps('paymentTo')}
           classNames={{ control: classes.controls }}
-          value={valueTo}
-          onChange={setValueTo}
+          // value={valueTo}
+          // onChange={setValueTo}
           mb="1.25rem"
         />
         <Button type="submit" h="40px">

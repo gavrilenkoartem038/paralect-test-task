@@ -7,7 +7,6 @@ import { useGetVacanciesQuery, useLoginQuery } from '../../store/api/api';
 import PagComponent from '../../components/Pagination/Pagination';
 import { loginData } from '../../store/api/data';
 import { getToken } from '../../utils/tokenUtils';
-import './main.css';
 
 const Main = () => {
   const params = useAppSelector((state) => state.commonReducer);
@@ -21,15 +20,7 @@ const Main = () => {
 
   return (
     <>
-      <Flex
-        direction="row"
-        align="flex-start"
-        gap="28px"
-        justify="center"
-        p="40px 10px"
-        bg="#F7F7F8"
-        className="container"
-      >
+      <Flex direction="row" align="flex-start" gap="28px" justify="center" p="40px" bg="#F7F7F8" className="container">
         <Form />
         <Flex direction="column" gap="md" w="100%" maw="773px">
           <Search />
