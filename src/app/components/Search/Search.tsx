@@ -25,11 +25,12 @@ const Search = () => {
 
   return (
     <TextInput
+      data-elem="search-input"
       classNames={{ input: classes.input }}
       onChange={onChange}
       icon={<IconSearch size="1.1rem" stroke={1.5} />}
       rightSection={
-        <Button onClick={onClick} h="2rem">
+        <Button onClick={onClick} h="2rem" data-elem="search-button">
           Поиск
         </Button>
       }

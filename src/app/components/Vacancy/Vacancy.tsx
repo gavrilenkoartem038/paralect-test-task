@@ -20,7 +20,9 @@ const Vacancy = ({ vacancy, type }: Props) => {
 
   const onClick = (e: MouseEvent<HTMLElement | SVGElement>) => {
     if (e.target instanceof HTMLElement && !window.location.pathname.includes('vacancies')) {
-      navigate(`/vacancies/${id}`);
+      if (!e.target.closest('.unstyled-button')) {
+        navigate(`/vacancies/${id}`);
+      }
     }
   };
 
@@ -39,6 +41,7 @@ const Vacancy = ({ vacancy, type }: Props) => {
 
   return (
     <Flex
+      data-elem={`vacancy-${id}`}
       direction="column"
       onClick={onClick}
       p={matches ? '12px' : '23px'}

@@ -32,17 +32,15 @@ const StarIcon = ({ id }: Props) => {
 
   const isActive = favorites.includes(id) ? 'active' : '';
 
-  const onClick = (event: MouseEvent<SVGElement>) => {
+  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
     dispatch(toggleFavorites(id));
     event.currentTarget.classList.toggle('active');
   };
 
   return (
-    <FavoriteIcon
-      style={{ minWidth: '24px', width: '24px' }}
-      onClick={onClick}
-      className={`${classes.button} ${isActive}`}
-    />
+    <button className="unstyled-button" onClick={onClick} data-elem={`vacancy-${id}-shortlist-button`}>
+      <FavoriteIcon style={{ minWidth: '24px', width: '24px' }} className={`${classes.button} ${isActive}`} />
+    </button>
   );
 };
 

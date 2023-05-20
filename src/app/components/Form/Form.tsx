@@ -80,6 +80,7 @@ const Form = () => {
           </Button>
         </Flex>
         <Select
+          data-elem="industry-select"
           label="Отрасль"
           placeholder="Выберите отрасль"
           data={
@@ -95,6 +96,7 @@ const Form = () => {
           mb="20px"
         />
         <NumberInput
+          data-elem="salary-from-input"
           label="Оклад"
           placeholder="От"
           step={1000}
@@ -104,6 +106,7 @@ const Form = () => {
           mb="0.5rem"
         />
         <NumberInput
+          data-elem="salary-to-input"
           placeholder="До"
           step={1000}
           {...form.getInputProps('paymentTo')}
@@ -111,7 +114,7 @@ const Form = () => {
           min={0}
           mb="1.25rem"
         />
-        <Button type="submit" h="40px">
+        <Button data-elem="search-button" type="submit" h="40px">
           Применить
         </Button>
       </form>
