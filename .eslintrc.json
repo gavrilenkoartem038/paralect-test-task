@@ -15,7 +15,6 @@
     "plugin:prettier/recommended",
     "plugin:import/recommended"
   ],
-  // Specifying Parser
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -26,9 +25,7 @@
     "tsconfigRootDir": ".",
     "project": ["./tsconfig.json"]
   },
-  // Configuring third-party plugins
   "plugins": ["react", "@typescript-eslint", "prettier"],
-  // Resolve imports
   "settings": {
     "import/resolver": {
       "typescript": {
@@ -41,7 +38,6 @@
   },
   "rules": {
     "linebreak-style": "off",
-    // Disallow the `any` type.
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/ban-types": [
       "error",
@@ -65,7 +61,6 @@
       }
     ],
     "react-hooks/exhaustive-deps": "off",
-    // Enforce the use of the shorthand syntax.
     "object-shorthand": "error",
     "no-console": "warn"
   }

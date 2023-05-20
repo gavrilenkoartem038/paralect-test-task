@@ -1,4 +1,3 @@
-import { Container } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
 import PageHeader from '../Header/Header';
 

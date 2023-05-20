@@ -70,7 +70,7 @@ const ThemeProvider = ({ children }: Props) => {
               },
               item: {
                 '&:hover': {
-                  backgroundColor: theme.colors.main[3],
+                  backgroundColor: theme.colors.main[1],
                 },
                 '&[data-selected]': {
                   backgroundColor: theme.colors.main[5],
@@ -104,6 +104,9 @@ const ThemeProvider = ({ children }: Props) => {
                   color: theme.colors.gray[5],
                 },
                 '&:hover': {
+                  borderColor: theme.colors.main[5],
+                },
+                '&:focus': {
                   borderColor: theme.colors.main[5],
                 },
               },

@@ -14,6 +14,7 @@ a, a:link, a:visited  {
 
 .nav-link.active {
   color: #5E96FC;
+  font-weight: 500;
 }
 
 .title {

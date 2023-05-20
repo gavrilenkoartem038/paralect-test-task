@@ -21,7 +21,7 @@ const VacancyPage = () => {
           maw="773px"
           justify="center"
           m="0 auto"
-          p="40px"
+          p="40px 0"
           className="container"
         >
           {data && <Vacancy vacancy={data} type="current" />}

@@ -1,6 +1,6 @@
 import { Text, Button, Flex, Select, createStyles, NumberInput } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
+import { IconX } from '@tabler/icons-react';
 import { useGetCatalogueQuery } from '../../store/api/api';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeFormParams } from '../../store/slices/commonSlice';

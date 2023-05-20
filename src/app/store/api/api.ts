@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Catalogue, LoginData, LoginReturn, SearchObject, Vacancies, VacancyObject } from './types';
 import getHeaders from '../../utils/tokenUtils';
-
-const API_URL = 'https://startup-summer-2023-proxy.onrender.com';
+import { API_URL } from './data';
 
 const searchUrl = ({ searchString, catalogues, paymentFrom, paymentTo, page }: SearchObject) => {
   let str = `/2.0/vacancies/?page=${String(page - 1)}&count=4&published=1`;

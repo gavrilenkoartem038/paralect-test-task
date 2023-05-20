@@ -1,8 +1,8 @@
 import { TextInput, Button, createStyles } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeSearchString } from '../../store/slices/commonSlice';
 import { ChangeEvent, useState } from 'react';
+import { ReactComponent as SearchIcon } from '../../assets/svg/Search.svg';
 
 const useStyles = createStyles(() => ({
   input: { height: '3rem' },
@@ -28,7 +28,7 @@ const Search = () => {
       data-elem="search-input"
       classNames={{ input: classes.input }}
       onChange={onChange}
-      icon={<IconSearch size="1.1rem" stroke={1.5} />}
+      icon={<SearchIcon />}
       rightSection={
         <Button onClick={onClick} h="2rem" data-elem="search-button">
           Поиск
