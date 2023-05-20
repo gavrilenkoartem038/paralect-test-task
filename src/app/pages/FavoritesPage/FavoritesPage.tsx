@@ -10,7 +10,7 @@ const FavoritesPage = () => {
   const { favorites, page } = useAppSelector((state) => state.favoriteReducer);
 
   const subArr = favorites.slice((page - 1) * 4, page * 4);
-  const pages = favorites.length <= 500 ? Math.ceil(favorites.length / 4) : 125;
+  const pages = favorites.length;
 
   const { data, isFetching } = useGetFavoritesQuery(subArr);
 
@@ -24,15 +24,19 @@ const FavoritesPage = () => {
 
   return (
     <>
-      <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" pt="40px" pb="40px">
+      <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" p="40px" className="container">
         {isFetching ? (
-          <Center mih="608px" mx="auto">
+          <Center h="calc(100vh - 120px)">
             <Loader size="xl" variant="dots" />
           </Center>
         ) : (
-          data && <VacanciesList {...data} />
+          data && (
+            <>
+              <VacanciesList {...data} />
+              <PagComponent total={pages} reducer="favorites" />
+            </>
+          )
         )}
-        <PagComponent total={pages} reducer="favorites" />
       </Flex>
     </>
   );

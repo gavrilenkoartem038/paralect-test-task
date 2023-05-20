@@ -4,7 +4,7 @@ import Vacancy from '../Vacancy/Vacancy';
 
 const VacanciesList = (data: Vacancies) => {
   return (
-    <Flex direction="column" gap="md">
+    <Flex direction="column" gap="md" mb="auto" w="100%">
       {data?.objects.map((item) => (
         <Vacancy vacancy={item} key={item.id} />
       ))}

@@ -10,11 +10,20 @@ const VacancyPage = () => {
   return (
     <>
       {isLoading ? (
-        <Center h="800vh" mx="auto">
+        <Center h="80vh" mx="auto">
           <Loader size="xl" variant="dots" />
         </Center>
       ) : (
-        <Flex direction="column" gap="20px" w="100%" maw="773px" justify="center" m="0 auto" pt="40px" pb="40px">
+        <Flex
+          direction="column"
+          gap="20px"
+          w="100%"
+          maw="773px"
+          justify="center"
+          m="0 auto"
+          p="40px"
+          className="container"
+        >
           {data && <Vacancy vacancy={data} type="current" />}
           <Box p="xl" data-id={id} bg="white" sx={{ border: '1px solid #EAEBED', borderRadius: '12px' }}>
             <TypographyStylesProvider>

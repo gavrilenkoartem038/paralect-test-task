@@ -11,7 +11,7 @@ const PageHeader = () => {
   return (
     <Flex justify="center" sx={{ backgroundColor: 'white' }}>
       <Header
-        height={{ base: 64, md: 84 }}
+        height="84"
         pl="xl"
         pr="xl"
         sx={{ display: 'flex', alignItems: 'center', maxWidth: '1440px', width: '100%' }}
@@ -25,7 +25,7 @@ const PageHeader = () => {
             </Title>
           </Flex>
           <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-            <Flex align="center" gap="60px" sx={{ width: 'calc(50% + 136px)' }}>
+            <Flex align="center" gap="66px" sx={{ width: 'calc(50% + 136px)' }}>
               <NavLink to="/" className="nav-link">
                 Поиск вакансий
               </NavLink>

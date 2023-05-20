@@ -33,7 +33,7 @@ const Search = () => {
           Поиск
         </Button>
       }
-      placeholder="Search questions"
+      placeholder="Введите название вакансии"
       rightSectionWidth={110}
       value={searchValue}
     />

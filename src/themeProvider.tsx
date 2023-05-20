@@ -64,17 +64,26 @@ const ThemeProvider = ({ children }: Props) => {
                 '&:hover': {
                   borderColor: theme.colors.main[5],
                 },
+                '&:focus': {
+                  borderColor: theme.colors.main[5],
+                },
               },
               item: {
                 '&:hover': {
                   backgroundColor: theme.colors.main[3],
                 },
+                '&[data-selected]': {
+                  backgroundColor: theme.colors.main[5],
+                  '&:hover': {
+                    backgroundColor: theme.colors.main[4],
+                  },
+                },
               },
               wrapper: {
                 '&:focus-within .mantine-Select-rightSection': {
                   transform: 'rotate(180deg)',
-                  svg: {
-                    stroke: theme.colors.main,
+                  path: {
+                    stroke: theme.colors.main[5],
                   },
                 },
               },
@@ -98,6 +107,24 @@ const ThemeProvider = ({ children }: Props) => {
                   borderColor: theme.colors.main[5],
                 },
               },
+              rightSection: {
+                right: '5px',
+                height: 'initial',
+              },
+              control: {
+                color: theme.colors.gray[5],
+                '&:hover': {
+                  color: theme.colors.gray[3],
+                  backgroundColor: 'unset',
+                },
+                '&:not(:disabled):hover': {
+                  color: theme.colors.main[4],
+                  backgroundColor: 'unset',
+                },
+                '&:not(:disabled):active': {
+                  color: theme.colors.main[5],
+                },
+              },
             }),
           },
           Input: {
@@ -119,6 +146,30 @@ const ThemeProvider = ({ children }: Props) => {
               },
             }),
           },
+          Pagination: {
+            styles: (theme) => ({
+              control: {
+                fontFamily: 'Roboto, sans-serif',
+                borderColor: theme.colors.gray[3],
+                '& path': {
+                  fill: theme.colors.gray[6],
+                },
+                '&[data-active]': {
+                  backgroundColor: theme.colors.main[5],
+                  '&:not([data-disabled]):hover': {
+                    backgroundColor: theme.colors.main[4],
+                  },
+                },
+                '&[data-disabled]': {
+                  borderColor: theme.colors.gray[2],
+                  opacity: 1,
+                  '& path': {
+                    fill: theme.colors.gray[3],
+                  },
+                },
+              },
+            }),
+          },
         },
         colors: {
           main: [
@@ -134,18 +185,6 @@ const ThemeProvider = ({ children }: Props) => {
             '#253B63',
           ],
           gray: [
-            '#f8f9fa',
-            '#F5F5F6',
-            '#EAEBED',
-            '#D5D6DC',
-            '#ced4da',
-            '#ACADB9',
-            '#7B7C88',
-            '#495057',
-            '#343a40',
-            '#212529',
-          ],
-          gray1: [
             '#f8f9fa',
             '#F5F5F6',
             '#EAEBED',

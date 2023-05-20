@@ -10,6 +10,7 @@ const searchUrl = ({ searchString, catalogues, paymentFrom, paymentTo, page }: S
   if (catalogues !== '') str += `&catalogues=${catalogues}`;
   if (paymentFrom !== '') str += `&payment_from=${paymentFrom}`;
   if (paymentTo !== '') str += `&payment_to=${paymentTo}`;
+  if (paymentFrom !== '' || paymentTo !== '') str += '&no_agreement=1';
 
   return str;
 };

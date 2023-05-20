@@ -37,7 +37,13 @@ const StarIcon = ({ id }: Props) => {
     event.currentTarget.classList.toggle('active');
   };
 
-  return <FavoriteIcon style={{ width: '24px' }} onClick={onClick} className={`${classes.button} ${isActive}`} />;
+  return (
+    <FavoriteIcon
+      style={{ minWidth: '24px', width: '24px' }}
+      onClick={onClick}
+      className={`${classes.button} ${isActive}`}
+    />
+  );
 };
 
 export default StarIcon;

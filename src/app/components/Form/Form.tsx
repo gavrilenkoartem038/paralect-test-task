@@ -25,7 +25,15 @@ const Form = () => {
     },
 
     validate: {
-      paymentTo: (value, values) => (value < values.paymentFrom ? 'Введите правильный диапазон' : null),
+      paymentTo: (value, values) => {
+        if (value !== '' && values.paymentFrom !== '') {
+          if (value < values.paymentFrom) {
+            return 'Введите правильный диапазон';
+          } else {
+            return null;
+          }
+        }
+      },
     },
   });
 
@@ -84,8 +92,6 @@ const Form = () => {
           rightSection={<DownIcon />}
           rightSectionWidth={46}
           {...form.getInputProps('catalogues')}
-          // value={cataloguesValue}
-          // onChange={setCatalogues}
           mb="20px"
         />
         <NumberInput
@@ -94,8 +100,7 @@ const Form = () => {
           step={1000}
           {...form.getInputProps('paymentFrom')}
           classNames={{ control: classes.controls }}
-          // value={valueFrom}
-          // onChange={setValueFrom}
+          min={0}
           mb="0.5rem"
         />
         <NumberInput
@@ -103,8 +108,7 @@ const Form = () => {
           step={1000}
           {...form.getInputProps('paymentTo')}
           classNames={{ control: classes.controls }}
-          // value={valueTo}
-          // onChange={setValueTo}
+          min={0}
           mb="1.25rem"
         />
         <Button type="submit" h="40px">
