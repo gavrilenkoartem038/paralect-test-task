@@ -16,7 +16,7 @@ const getStorage = () => {
 
 const initialState: Favorites = {
   favorites: getStorage(),
-  page: 0,
+  page: 1,
 };
 
 export const favoritesSlice = createSlice({
