@@ -5,7 +5,7 @@ import StarIcon from './StarIcon';
 import { ReactComponent as LocationIcon } from '../../assets/svg/location.svg';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent } from 'react';
-import { useMediaQuery } from '@mantine/hooks';
+import './vacancy.css';
 
 type Props = {
   vacancy: VacancyObject;
@@ -15,8 +15,6 @@ type Props = {
 const Vacancy = ({ vacancy, type }: Props) => {
   const { id, profession, town, type_of_work, payment_from, payment_to, currency } = vacancy;
   const navigate = useNavigate();
-
-  const matches = useMediaQuery('(max-width: 580px)');
 
   const onClick = (e: MouseEvent<HTMLElement | SVGElement>) => {
     if (e.target instanceof HTMLElement && !window.location.pathname.includes('vacancies')) {
@@ -44,16 +42,18 @@ const Vacancy = ({ vacancy, type }: Props) => {
       data-elem={`vacancy-${id}`}
       direction="column"
       onClick={onClick}
-      p={matches ? '12px' : '23px'}
+      p="23px"
       w="100%"
       data-id={id}
-      gap={matches ? '8px' : type === 'current' ? '14px' : 'sm'}
+      gap={type === 'current' ? '14px' : 'sm'}
       bg="white"
       sx={{ border: '1px solid #EAEBED', borderRadius: '12px' }}
+      className="vacancy"
     >
       <Flex justify="space-between" align="flex-start" gap="sm">
         <Text
-          size={matches ? 'md' : type === 'current' ? '28px' : '20px'}
+          className="vacancy__header"
+          size={type === 'current' ? '28px' : '20px'}
           fw={type === 'current' ? '700' : '600'}
           color={type === 'current' ? 'black' : 'main.5'}
           sx={
@@ -66,21 +66,24 @@ const Vacancy = ({ vacancy, type }: Props) => {
         </Text>
         <StarIcon id={id} />
       </Flex>
-      <Flex
-        gap={matches ? '8px' : 'sm'}
-        align={matches ? 'flex-start' : 'center'}
-        direction={matches ? 'column' : 'row'}
-        sx={{ alignSelf: 'flex-start' }}
-      >
-        <Text fw={type === 'current' ? '700' : '600'} size={matches ? '14px' : type === 'current' ? '20px' : 'inherit'}>
+      <Flex className="vacancy__info" gap="sm" align="center" direction="row" sx={{ alignSelf: 'flex-start' }}>
+        <Text
+          className="vacancy__payment"
+          fw={type === 'current' ? '700' : '600'}
+          size={type === 'current' ? '20px' : 'inherit'}
+        >
           {getPaymentString()}
         </Text>
-        <Text w="5px" h="5px" bg="gray.6" sx={{ borderRadius: '10px' }} display={matches ? 'none' : 'block'}></Text>
-        <Text size={matches ? '14px' : type === 'current' ? '20px' : 'inherit'}>{type_of_work.title}</Text>
+        <Text w="5px" h="5px" bg="gray.6" sx={{ borderRadius: '10px' }} className="dot"></Text>
+        <Text className="vacancy__type" size={type === 'current' ? '20px' : 'inherit'}>
+          {type_of_work.title}
+        </Text>
       </Flex>
       <Flex gap="xs" align="center">
         <LocationIcon />
-        <Text size={matches ? '14px' : 'md'}>{town.title}</Text>
+        <Text className="vacancy__town" size="md">
+          {town.title}
+        </Text>
       </Flex>
     </Flex>
   );
