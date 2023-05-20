@@ -2,12 +2,15 @@ import { Center, Flex, Loader } from '@mantine/core';
 import Form from '../../components/Form/Form';
 import Search from '../../components/Search/Search';
 import VacanciesList from '../../components/VacanciesList/VacanciesList';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { useGetVacanciesQuery, useLoginQuery } from '../../store/api/api';
 import PagComponent from '../../components/Pagination/Pagination';
 import { loginData } from '../../store/api/data';
 import { getToken } from '../../utils/tokenUtils';
 import { useMediaQuery } from '@mantine/hooks';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { changeSearchString, changeFormParams } from '../../store/slices/commonSlice';
 
 const Main = () => {
   const params = useAppSelector((state) => state.commonReducer);
@@ -17,7 +20,18 @@ const Main = () => {
   const skipValue = getToken() ? true : false;
   useLoginQuery(loginData, { skip: skipValue });
 
-  const pages = vacanciesData?.total as number;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const total = vacanciesData?.total as number;
+
+  useEffect(() => {
+    if (total === 0) {
+      dispatch(changeSearchString(''));
+      dispatch(changeFormParams({ catalogues: '', paymentFrom: '', paymentTo: '' }));
+      navigate('/empty');
+    }
+  }, [navigate, total]);
 
   const matches = useMediaQuery('(max-width: 1000px)');
 
@@ -44,14 +58,14 @@ const Main = () => {
         >
           <Search />
           {isFetching ? (
-            <Center h={'680px'}>
+            <Center h="600px">
               <Loader size="xl" variant="dots" />
             </Center>
           ) : (
             vacanciesData && (
               <>
                 <VacanciesList {...vacanciesData} />
-                <PagComponent total={pages} reducer="common" />
+                <PagComponent total={total} reducer="common" />
               </>
             )
           )}

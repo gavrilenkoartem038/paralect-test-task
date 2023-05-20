@@ -24,9 +24,19 @@ const FavoritesPage = () => {
 
   return (
     <>
-      <Flex direction="column" gap="md" w="100%" maw="773px" justify="center" m="0 auto" p="40px" className="container">
+      <Flex
+        direction="column"
+        gap="md"
+        w="100%"
+        maw="773px"
+        justify="center"
+        m="0 auto"
+        p="40px"
+        className="container"
+        mih="calc(100vh - 84px)"
+      >
         {isFetching ? (
-          <Center h="calc(100vh - 120px)">
+          <Center h="600px">
             <Loader size="xl" variant="dots" />
           </Center>
         ) : (
