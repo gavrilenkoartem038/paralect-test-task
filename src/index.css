@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  min-height: 100vh;
+  background-color:#F7F7F8;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.unstyled-button {
+  display: flex;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 773px;
+    min-width: unset;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .container {
+    padding: 20px 10px;
+  }
+}
+
